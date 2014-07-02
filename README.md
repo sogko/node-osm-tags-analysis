@@ -35,6 +35,9 @@ So, what I needed was a way to do some basic analysis on the tagged key=value pa
 	node app.js
 	# and profit! (the app is accessible on http://localhost:3333)
   
+## Dependencies
+* Requires Java Runtime to run Osmosis behind the scenes
+* NodeJS
 
 ## How does it work?
 * Uses **Osmosis** to filter tags, accept/reject ways or nodes or relations etc
@@ -49,10 +52,6 @@ So, what I needed was a way to do some basic analysis on the tagged key=value pa
 * This app is generally meant to be run locally, partly due to the typically large .osm files.
 * But if anyone feels that they want to fire up an AWS instance to host this, please do :)
 * Contributions/suggestions are greatly welcomed
-
-## Dependencies
-* Requires Java Runtime to run Osmosis behind the scenes
-* NodeJS
 
 
 ## Links
