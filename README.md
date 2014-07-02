@@ -7,13 +7,13 @@ osm-tags-analysis
 Analyse .osm tagged data using NodeJS and Osmosis
 
 ## Screenshots
-[![Screenshot](/public/assets/images/osm-tags-analysis-screenshot.png?raw=true "osm-tags-analysis")](https://github.com/sogko/osm-tags-analysis/blob/master/public/assets/images/osm-tags-analysis-screenshot.png)
+[![Dayummmm look at dat screenshot](/public/assets/images/osm-tags-analysis-screenshot.png?raw=true "osm-tags-analysis")](https://github.com/sogko/osm-tags-analysis/blob/master/public/assets/images/osm-tags-analysis-screenshot.png)
 
 ## What is this?
 Basically a local webapp front-end to [Osmosis](https://github.com/openstreetmap/osmosis) with dynamic HTML5 tables to help you visually make informed analysis and decisions about your .osm files
 
 ## Why do this?
-While working on a geo-related project and having to deal with massive OpenStreetMap .osm files, it was a challenge trying to figure out what are tagged features available best to extract.
+While working on a geo-related project and having to deal with massive OpenStreetMap .osm files, it was a challenge trying to figure out which available tagged features are best to extract.
 
 Problem/challenges with .osm files
 
@@ -22,9 +22,10 @@ Problem/challenges with .osm files
 
 So, what I needed was a way to do some basic analysis on the tagged key=value pairs, stuff like
 
+* OSM entities count *(how many nodes/ways/relations in this blackhole of an XML file)*
 * unique tagged keywords used *(so I can get a list of all keywords used)*
 * frequency of key=value pairs *(i.e. "how many times **type=route** and **route=trains** appear?")*
-* less time hitting command-line to re-generate .osm files
+* less time hitting command-line to re-generate .osm files 
 * increased productivity
 * leverage synergy
 * synchronized swimming
@@ -64,3 +65,4 @@ So, what I needed was a way to do some basic analysis on the tagged key=value pa
 
 ## TODO
 * Write a TODO
+* Write a better README
