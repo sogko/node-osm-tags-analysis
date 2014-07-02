@@ -1,4 +1,7 @@
-.idea/encodings.xml
-.idea/*
-*.xml
-*.iml
+.idea/**
+ways.cache/**
+nodes.cache/**
+relations.cache/**
+node_modules/**
+uploads/**
+public/downloads/**

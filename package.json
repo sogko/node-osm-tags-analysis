@@ -1,0 +1,20 @@
+{
+  "name": "osm-tags-analysis",
+  "version": "0.1.0",
+  "description": "Analyse .osm tagged data",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.4.3",
+    "connect-busboy": "0.0.1",
+    "express": "^4.4.5",
+    "lodash": "^2.4.1",
+    "minimist": "^0.2.0",
+    "osmparser": "0.0.3"
+  },
+  "author": {
+    "name": "Hafiz Ismail",
+    "email": "sogko@wehavefaces.net",
+    "url": "http://wehavefaces.net"
+  },
+  "directories": {}
+}
