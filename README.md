@@ -7,7 +7,7 @@ osm-tags-analysis
 Analyse .osm tagged data using NodeJS and Osmosis
 
 ## Screenshots
-[![Screenshot](/public/assets/images/osm-tags-analysis-screenshot-thumbnail.png?raw=true "osm-tags-analysis")](https://github.com/sogko/osm-tags-analysis/blob/master/public/assets/images/osm-tags-analysis-screenshot.png)
+[![Screenshot](/public/assets/images/osm-tags-analysis-screenshot.png?raw=true "osm-tags-analysis")](https://github.com/sogko/osm-tags-analysis/blob/master/public/assets/images/osm-tags-analysis-screenshot.png)
 
 ## What is this?
 Basically a local webapp front-end to [Osmosis](https://github.com/openstreetmap/osmosis) with dynamic HTML5 tables to help you visually make informed analysis and decisions about your .osm files
