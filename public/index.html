@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>osm-tags-analysis</title>
+
+    <link rel="stylesheet" href="/assets/external/bootstrap-3.2.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/external/jquery.dynatable/jquery.dynatable.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/external/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css">
+    <script src="/assets/external/jquery-2.1.1.min.js"></script>
+    <script src="/assets/external/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+    <script src="/assets/external/jquery.form.min.js"></script>
+    <script src="/assets/external/jquery.dynatable/jquery.dynatable.js"></script>
+</head>
+<body>
+<!-- here be dragons -->
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-4 col-xs-4 left-container">
+
+            <div class="row app-details">
+                <h1><span class="glyphicon glyphicon-stats"></span> osm-tags-analysis</h1>
+
+                <p class="lead">analyse and export your OpenStreetMap files (.osm)</p>
+            </div>
+            <div class="row form-box">
+
+                <form class="form" role="form" id="appform" action="/upload" method="post"
+                      enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="inputfile" class=" control-label">Select your .osm file</label>
+                        <input type="file" id="inputfile" name="inputfile">
+                    </div>
+                    <div class="form-group">
+                        <label for="osmosis-options" class=" control-label">Osmosis options</label>
+                        <textarea type="text" cols="5" rows="5" class="form-control" id="osmosis-options"
+                                  name="osmosis-options">--tf accept-relations type=route --tf reject-relations
+                            route=foot,mtb,bicycle,hiking,aerialway --tf reject-ways --tf reject-nodes</textarea>
+
+                        <p class="help-block">
+                            <samp>eg: --tag-filter accept-relations type=route --tf reject-ways</samp>
+                        </p>
+                    </div>
+                    <div class="col-sm-12">
+                        <input type="submit" name="submit" value="Submit" class="btn btn-primary col-sm-12"/>
+                    </div>
+                </form>
+            </div>
+            <hr/>
+            <div class="row form-box">
+                <h4>How does it work?</h4>
+                <ul>
+                    <li>Uses <strong>Osmosis</strong> to filter tags, accept/reject ways or nodes or relations etc</li>
+                    <li>After generating filtered data, analysis is done on the tagged data to extract the following
+                        information:
+                        <ul>
+                            <li>OSM entities (nodes/ways/relations) count</li>
+                            <li>Frequency of tagged key=value pairs for each entity type</li>
+                            <li>List of unique tagged keys and values</li>
+                        </ul>
+                    </li>
+                </ul>
+                <hr/>
+                <h4>Notes</h4>
+                <ul>
+                    <li>Only Data Manipulation Tasks are allowed currently</li>
+                    <li>Go to <a href="/clean" target="_blank">/clean</a> to clean up generated files (downloads,
+                        uploads, cache)
+                    </li>
+                    <li>Contributions are greatly welcomed at <a target="_blank" href="http://github.com/sogko/osm-tags-analysis">github/sogko</a> </li>
+                </ul>
+                <hr/>
+                <h4>Links</h4>
+                <ul>
+                    <li><a target="_blank"
+                           href="https://wiki.openstreetmap.org/wiki/Osmosis/Detailed_Usage#Data_Manipulation_Tasks">Osmosis
+                        Usage Guide</a></li>
+                    <li><a target="_blank" href="http://github.com/sogko/osm-tags-analysis">Source @ github/sogko</a>
+                    </li>
+                    <li><a target="_blank" href="http://twitter/sogko">twitter/sogko</a></li>
+                </ul>
+            </div>
+
+            <hr/>
+
+            <div class="row footer">
+                <div class="col-md-12">
+                    Created by Hafiz Ismail / sogko / wehavefaces
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8 empty-results-column col-md-offset-4  col-xs-8 col-xs-offset-4 message-container">
+
+            <p class="message"></p>
+
+            <p class="description"></p>
+
+        </div>
+        <div class="col-md-8 results-column col-md-offset-4 col-xs-8 col-xs-offset-4 main-container">
+            <div class="row download-link-container">
+                <div class="col-md-12">
+
+                    <h2>Download your generated data</h2>
+                    <!--<p class="d">Right-click to save </p>-->
+                    <p>
+                        <span class="download-description">.osm file: </span><a href="#" class="osm-download-link">{link}</a><br/>
+                        <span class="download-description">.json statistics </span><a href="#"
+                                                                                      class="json-download-link">{link}</a>
+                    </p>
+                </div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-md-4">
+                    <h3 class="summary-header">Summary</h3>
+                    <table id="summary-table" class="table table-bordered table-condensed">
+                        <tr>
+                            <th class="alt">Types</th>
+                            <th class="alt">Count</th>
+                        </tr>
+                        <tr>
+                            <th>Nodes</th>
+                            <td class="nodes_count">0</td>
+                        </tr>
+                        <tr>
+                            <th>Relations</th>
+                            <td class="relations_count">0</td>
+                        </tr>
+                        <tr>
+                            <th>Ways</th>
+                            <td class="ways_count">0</td>
+                        </tr>
+                        <tr>
+                            <th>Unique Keys</th>
+                            <td class="keys_count">0</td>
+                        </tr>
+                        <tr>
+                            <th>Unique Values</th>
+                            <td class="value_count">0</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="col-md-8">
+
+                    <h3>Keys</h3>
+                    <table id="keys-table" class="table table-bordered table-condensed table-hover">
+                        <thead>
+                        <th>Key</th>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+            <hr/>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>Browse Tagged Values</h4>
+                    <table id="results-table" class="table table-bordered table-hover">
+                        <thead>
+                        <th>Type</th>
+                        <th>Key</th>
+                        <th>Value</th>
+                        <th>Count</th>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+This directory will contain generated files available for downloads
