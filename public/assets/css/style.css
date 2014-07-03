@@ -18,7 +18,9 @@ th.alt {
     background: #2d6ca2;
 
 }
-
+#map {
+    height: 500px;
+}
 .footer {
     background-color: #efefef;
     color: #a1a1a1;
@@ -99,7 +101,7 @@ th.alt {
     /*font-size:38px;*/
 }
 
-#osmosis-options {
+#filter-options {
     font-family: consolas, monaco, "courier new", courier, monospace;
 }
 

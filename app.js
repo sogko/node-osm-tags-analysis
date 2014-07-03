@@ -2,7 +2,7 @@ var fs = require('fs');
 var express = require('express');
 var bodyParser = require('body-parser');
 var busboy = require('connect-busboy');
-var osmosis = require('./lib/osmosis');
+var osmfilter = require('./lib/osmfilter');
 var analyser = require('./lib/analyser');
 
 var app = express();
@@ -40,7 +40,7 @@ app.post('/upload', function(req, res){
 
     var waitCount = 2;
     var filepath;
-    var osmosis_options = '';
+    var filter_options = '';
 
     var signalReadyForProcessing = function(){
         waitCount--;
@@ -57,8 +57,8 @@ app.post('/upload', function(req, res){
 
         console.log('Generating filtered .osm file...');
 
-        osmosis(filepath, osm_destfilepath , osmosis_options, function(osm_filepath, err){
-            if (err)return handleError('Osmosis failed', 'Ensure that the file and the options are valid');
+        osmfilter(filepath, osm_destfilepath , filter_options, function(osm_filepath, err){
+            if (err)return handleError('osmfilter failed', 'Ensure that the file and the options are valid ('+err+')');
 
             console.log('Analysing filtered .osm file...', err);
             analyser(osm_filepath, json_destfilepath, function(results, json_filepath, err){
@@ -98,8 +98,8 @@ app.post('/upload', function(req, res){
     });
 
     req.busboy.on('field', function(key, value, keyTruncated, valueTruncated) {
-        if (key === 'osmosis-options'){
-            osmosis_options = value.trim();
+        if (key === 'filter-options'){
+            filter_options = value.trim();
         }
         signalReadyForProcessing();
     });

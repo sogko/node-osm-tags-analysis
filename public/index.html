@@ -8,10 +8,15 @@
     <link rel="stylesheet" href="/assets/external/jquery.dynatable/jquery.dynatable.css">
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/assets/external/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/assets/external/leaflet-0.7.3/leaflet.css">
+
     <script src="/assets/external/jquery-2.1.1.min.js"></script>
     <script src="/assets/external/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
     <script src="/assets/external/jquery.form.min.js"></script>
     <script src="/assets/external/jquery.dynatable/jquery.dynatable.js"></script>
+    <script src="/assets/external/leaflet-0.7.3/leaflet-src.js"></script>
+    <script src="/assets/external/leaflet-osm.js"></script>
+
 </head>
 <body>
 <!-- here be dragons -->
@@ -34,13 +39,11 @@
                         <input type="file" id="inputfile" name="inputfile">
                     </div>
                     <div class="form-group">
-                        <label for="osmosis-options" class=" control-label">Osmosis options</label>
-                        <textarea type="text" cols="5" rows="5" class="form-control" id="osmosis-options"
-                                  name="osmosis-options">--tf accept-relations type=route --tf reject-relations
-                            route=foot,mtb,bicycle,hiking,aerialway --tf reject-ways --tf reject-nodes</textarea>
+                        <label for="filter-options" class=" control-label">Filter options</label>
+                        <textarea type="text" cols="5" rows="5" class="form-control" id="filter-options" name="filter-options"></textarea>
 
                         <p class="help-block">
-                            <samp>eg: --tag-filter accept-relations type=route --tf reject-ways</samp>
+                            <samp>eg: --tag-filter accept-relations type=route --tf reject-waysssdssdsdsd</samp>
                         </p>
                     </div>
                     <div class="col-sm-12">
@@ -52,7 +55,7 @@
             <div class="row form-box">
                 <h4>How does it work?</h4>
                 <ul>
-                    <li>Uses <strong>Osmosis</strong> to filter tags, accept/reject ways or nodes or relations etc</li>
+                    <li>Uses <strong>osmfilter</strong> to filter tags, accept/reject ways or nodes or relations etc</li>
                     <li>After generating filtered data, analysis is done on the tagged data to extract the following
                         information:
                         <ul>
@@ -75,7 +78,7 @@
                 <h4>Links</h4>
                 <ul>
                     <li><a target="_blank"
-                           href="https://wiki.openstreetmap.org/wiki/Osmosis/Detailed_Usage#Data_Manipulation_Tasks">Osmosis
+                           href="http://wiki.openstreetmap.org/wiki/Osmfilter"><strong>osmfilter</strong>
                         Usage Guide</a></li>
                     <li><a target="_blank" href="http://github.com/sogko/osm-tags-analysis">Source @ github/sogko</a>
                     </li>
@@ -113,6 +116,9 @@
                 </div>
             </div>
             <hr/>
+            <div class="row">
+                <div id="map" class="col-md-12"></div>
+            </div>
             <div class="row">
                 <div class="col-md-4">
                     <h3 class="summary-header">Summary</h3>

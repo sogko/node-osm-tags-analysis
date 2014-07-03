@@ -13,9 +13,17 @@ $(document).ready(function() {
         }
     });
 
+    // init map
+    var layer;
+    var map = L.map('map').setView([1.3711754, 103.9541637], 13);
+    L.tileLayer('http://{s}.tiles.mapbox.com/v3/sogko.im2lnfi6/{z}/{x}/{y}.png', {
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="http://mapbox.com">Mapbox</a>',
+        maxZoom: 18
+    }).addTo(map);
+
     // register onChange
     $('#inputfile').change(function(){
-        showMessage('File ready', 'Click submit to start uploading. <br/>Optionally, you specify Osmosis options to filter the data.');
+        showMessage('File ready', 'Click submit to start uploading. <br/>Optionally, you specify <strong>osmfilter</strong> options to filter the data.');
     });
     $('#appform').submit(function() {
 
@@ -23,7 +31,7 @@ $(document).ready(function() {
             showMessage('No file selected', 'Select an .osm file before continuing');
             return false;
         }
-        showMessage('Processing file ...', 'Osmosis will generate a filtered .osm data based on your options and a statistical analysis of the data will be performed');
+        showMessage('Processing file ...', '<strong>osmfilter</strong> will generate a filtered .osm data based on your options and a statistical analysis of the data will be performed');
 
         $(this).ajaxSubmit({
 
@@ -78,11 +86,29 @@ $(document).ready(function() {
                         .text(response.download_links.json)
                         .attr('href', response.download_links.json);
 
-                    showMessage('Completed', 'A download link will be generated for you, along with the tag analysis');
-                    setTimeout(function(){
-                        hideMessage();
-                    }, 1000);
+                    showMessage('Downloading generated .osm file...', 'An interactive map will be generated from the filtered .osm data');
+                    $.ajax({
+                        beforeSend: function(xhr, settings) { xhr.requestURL = response.download_links.osm; },
+                        url: response.download_links.osm,
+                        dataType: 'xml',
+                        success: function (xml) {
 
+                            showMessage('Generating map...', 'Piecing together an interactive map from the filtered .osm data <br/><small>Depending on your data size, this might take a while</small>');
+                            if(layer) layer.clearLayers();
+                            layer = new L.OSM.DataLayer(xml).addTo(map);
+                            if (layer.getBounds()) {
+                                map.fitBounds(layer.getBounds());
+                            }
+
+                            showMessage('Completed', 'A download link will be generated for you, along with the tag analysis');
+                            setTimeout(function(){
+                                hideMessage();
+                            }, 1000);
+                        },
+                        error: function(xhr){
+                            showMessage('Failed to download .osm', xhr.requestURL+ '<br/>Error: ' + xhr.statusText);
+                        }
+                    });
                 } catch(e) {
                     showMessage('Client Error', 'Encountered an error displaying returned result :(');
                 }
