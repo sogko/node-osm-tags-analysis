@@ -48,7 +48,6 @@ $(document).ready(function() {
                 try {
                     var records = [];
                     var keys_table = [];
-                    var values_table = [];
 
                     // transform data to fit dynatable
                     for (var type in response){
@@ -64,8 +63,7 @@ $(document).ready(function() {
                             }
                         }
                     }
-                    for (var k in response.keys) keys_table.push({key: response.keys[k]});
-                    for (var v in response.values) values_table.push({value: response.values[v]});
+                    for (var k in response.keys) keys_table.push({key: k, count: response.keys[k]});
 
                     // update summary table
                     $('.nodes_count').text(response.count.nodes);
@@ -90,15 +88,17 @@ $(document).ready(function() {
                     $.ajax({
                         beforeSend: function(xhr, settings) { xhr.requestURL = response.download_links.osm; },
                         url: response.download_links.osm,
-                        dataType: 'xml',
-                        success: function (xml) {
-
+                        dataType: 'text',
+                        success: function (xmlString) {
+                            console.log('try to parse');
+                            var xml = $.parseXML(xmlString);
+                            console.log(xml);
                             showMessage('Generating map...', 'Piecing together an interactive map from the filtered .osm data <br/><small>Depending on your data size, this might take a while</small>');
                             if(layer) layer.clearLayers();
                             layer = new L.OSM.DataLayer(xml).addTo(map);
-                            if (layer.getBounds()) {
-                                map.fitBounds(layer.getBounds());
-                            }
+//                            if (layer.getBounds()) {
+//                                map.fitBounds(layer.getBounds());
+//                            }
 
                             showMessage('Completed', 'A download link will be generated for you, along with the tag analysis');
                             setTimeout(function(){

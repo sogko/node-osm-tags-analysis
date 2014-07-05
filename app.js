@@ -15,10 +15,7 @@ app.use(busboy());
 var cleanTempDir = function(){
     var dirs = [
             __dirname + '/uploads/',
-            __dirname + '/public/downloads/',
-            __dirname + '/nodes.cache/',
-            __dirname + '/ways.cache/',
-            __dirname + '/relations.cache/'
+            __dirname + '/public/downloads/'
     ];
     dirs.forEach(function(dir){
         fs.readdirSync(dir).forEach(function(fileName) {
