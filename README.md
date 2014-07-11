@@ -60,11 +60,11 @@ So, what I needed was a way to do some basic analysis on the tagged key=value pa
 
 ## Links
 * [osmfilter Usage Guide](http://wiki.openstreetmap.org/wiki/Osmfilter)
-* [wehavefaces.net](http://wehavefaces.net)
+* [medium.com/@sogko](http://medium.com/@sogko)
 * [twitter/sogko](http://twitter.com/sogko)
 
 ## Contributions
-* Hafiz Ismail (hafiz at wehavefaces dot net)
+* Hafiz Ismail
 
 ## TODO
 * Write a TODO
