@@ -9,7 +9,7 @@
     "express": "^4.4.5",
     "lodash": "^2.4.1",
     "minimist": "^0.2.0",
-    "osmparser": "0.0.3",
+    "osmparser": "0.0.3"
   },
   "author": {
     "name": "Hafiz Ismail",
